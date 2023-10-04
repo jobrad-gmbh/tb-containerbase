@@ -38,8 +38,7 @@ gh repo clone jobrad-gmbh/tb-containerbase
 # One of the following should work
 docker buildx build --build-arg MULTI='' --no-cache --tag ghcr.io/jobrad-gmbh/tb-containerbase:latest
 # ... or this
-docker buildx build --build-arg MULTI='' --build-arg MIRROR_AREA_PATTERN='default' --no-cache --tag ghcr.io/jobrad-gmbh/tb-containerbase:latest
- --progress=plain .
+docker buildx build --build-arg MULTI='' --build-arg MIRROR_AREA_PATTERN='default' --no-cache --tag ghcr.io/jobrad-gmbh/tb-containerbase:latest --progress=plain .
 # Publishing with
 docker push ghcr.io/jobrad-gmbh/tb-containerbase:latest
 ```
