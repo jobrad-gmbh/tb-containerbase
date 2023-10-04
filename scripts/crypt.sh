@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # crypt -d -p PASSWORD /from /to
 # crypt --decrypt --password PASSWORD /from /to

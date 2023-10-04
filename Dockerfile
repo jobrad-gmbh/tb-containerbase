@@ -24,8 +24,8 @@
 
 # Multi architecture
 
-# - podman pull heywoodlh/archlinux && podman build --file https://raw.githubusercontent.com/thaibault/containerbase/main/Dockerfile --no-cache --tag ghcr.io/thaibault/containerbase:latest .
-# - docker pull heywoodlh/archlinux && docker buildx build --no-cache --tag ghcr.io/thaibault/containerbase:latest .
+# - podman pull menci/archlinuxarm && podman build --file https://raw.githubusercontent.com/thaibault/containerbase/main/Dockerfile --no-cache --tag ghcr.io/thaibault/containerbase:latest .
+# - docker pull menci/archlinuxarm && docker buildx build --no-cache --tag ghcr.io/thaibault/containerbase:latest .
 # endregion
 # region start container commands
 # Run the following command in the directory where this file lives to start:
@@ -39,7 +39,7 @@ ARG        BASE_IMAGE
            # yet.
 ARG        MULTI=true
 
-FROM       ${BASE_IMAGE:-${MULTI:+'heywoodlh/'}}archlinux
+FROM       ${BASE_IMAGE:-${MULTI:+'menci/'}archlinux${MULTI:+'arm'}}
 
 LABEL      maintainer="Torben Sickert <info@torben.website>"
 LABEL      Description="base" Vendor="thaibault products" Version="1.0"
@@ -89,6 +89,7 @@ COPY       --link ./scripts/clean-up.sh /usr/bin/clean-up
            # NOTE: openssl-1.1 is needed by arm pacman but not provided per
            # default.
 RUN        pacman \
+               --disable-download-timeout \
                --needed \
                --noconfirm \
                --noprogressbar \
@@ -122,6 +123,7 @@ RUN        [[ "$MIRROR_AREA_PATTERN" != default ]] && \
            #true
            # Update package database to retrieve newest package versions
 RUN        pacman \
+               --disable-download-timeout \
                --needed \
                --noconfirm \
                --noprogressbar \
@@ -140,6 +142,7 @@ RUN        pacman \
            # region install needed packages
            # NOTE: "neovim" is only needed for debugging scenarios.
            pacman \
+               --disable-download-timeout \
                --needed \
                --noconfirm \
                --sync \
@@ -150,6 +153,7 @@ RUN        pacman \
            # endregion
            # region install packages to build other packages
 RUN        pacman \
+               --disable-download-timeout \
                --needed \
                --noconfirm \
                --noprogressbar \
