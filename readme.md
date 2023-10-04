@@ -28,6 +28,27 @@ Use case
 A basic ArchLinux based docker configuration with configured and ready to use
 git and yay.
 
+
+Build locally
+-------------
+```
+# Clone repo
+gh repo clone jobrad-gmbh/tb-containerbase
+
+# One of the following should work
+docker buildx build --build-arg MULTI='' --no-cache --tag ghcr.io/jobrad-gmbh/tb-containerbase:latest
+# ... or this
+docker buildx build --build-arg MULTI='' --build-arg MIRROR_AREA_PATTERN='default' --no-cache --tag ghcr.io/jobrad-gmbh/tb-containerbase:latest
+ --progress=plain .
+# Publishing with
+docker push ghcr.io/jobrad-gmbh/tb-containerbase:latest
+```
+
+The '--progress=plain' option allows to debug variables by adding "CMD echo "Variable 'var' = '$var'"
+
+
+
+
 <!-- region modline
 vim: set tabstop=4 shiftwidth=4 expandtab:
 vim: foldmethod=marker foldmarker=region,endregion:
